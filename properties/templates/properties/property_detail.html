@@ -1,0 +1,18 @@
+<div>
+    <a href="/">Back</a>
+</div>
+
+{% if is_owner %}
+<section>
+    {% if object.photo %}
+    <img src="/media/{{ object.photo }}" alt="" width="600" />
+    {% endif %}
+    
+    <div>
+        {{object.address}}
+        {{gross_yield}}
+        {{potential_gross_yield}}
+        {{mortgage_deal_expiry_date}}
+    </div>
+</section>
+{% endif %}

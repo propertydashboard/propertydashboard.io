@@ -1,0 +1,46 @@
+<h1>Property Dashboard</h1>
+
+<p>Portfolio value: {{portfolio_value}}</p>
+
+{{outstanding_mortgages}}
+
+{{ltv}}
+
+{{current_gross_yield}}
+
+{{potential_gross_yield}}
+
+{{rate_of_return}}
+
+{{doubling_period}}
+
+<p>Total income - £{{potential_rents}}</p>
+
+<p>You could be earning {{difference_in_rent}} more in rent a year</p>
+
+<a href="/">all</a>
+<a href="?city=liverpool">liverpool</a>
+<a href="?city=manchester">manchester</a>
+
+<div class="properties">
+{% for property in properties %}
+<section>
+    <a href="/{{ property.id }}">
+        {% if property.photo %}
+        <img src="/media/{{ property.photo }}" alt="" width="300" />
+        {% endif %}
+
+        <p>{{property.address}} - {{property.value}} - {{property.city}} - {{property.mortgage_deal_expiry_date}}</p>
+    </a>
+</section>
+{% endfor %}
+</div>
+
+<style>
+    .properties {
+        display: flex;
+        align-items: baseline;
+        flex-flow: wrap;
+        justify-content: space-between;
+    }
+</style>
