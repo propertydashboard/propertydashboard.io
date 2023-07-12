@@ -3,7 +3,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from datetime import datetime
 
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework import permissions
+
 from .models import Property
+from .serializers import PropertySerializer
 
 class PropertyDetailView(DetailView):
     model = Property
@@ -65,3 +71,12 @@ class PropertyListView(ListView):
         context['potential_rents'] = potential_rents
 
         return context
+
+
+class PropertyListApiView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        todos = Property.objects.filter(owner = request.user.id)
+        serializer = PropertySerializer(todos, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
