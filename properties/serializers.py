@@ -4,4 +4,4 @@ from .models import Property
 class PropertySerializer(serializers.ModelSerializer):
     class Meta:
         model = Property
-        fields = ["address"]
+        fields = ["address", "value", "city"]
